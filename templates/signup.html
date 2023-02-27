@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<p class="bienvenue">Bienvenue chez AQ54</p>
+<img src="{{ url_for('static', filename='img/assuretout.png') }}" alt="Logo AssureTout"
+	style="position:absolute; z-index: 2; top: 90px" width="70px">
+<form class="form" method="POST" action="/login">
+	<div class="title">Inscription</div>
+	<div class="input-container">
+		<input class="input" id="email" name="email" type="email" placeholder=" " />
+		<div class="cut-short"></div>
+		<label class="placeholder" for="email">Email<label />
+	</div>
+	<div class="input-container">
+		<input class="input" id="motdepasse" name="motdepasse" type="password" placeholder=" " />
+		<div class="cut-short"></div>
+		<label class="placeholder" for="motdepasse">Mot de passe<label />
+	</div>
+	<button class="submit" type="submit">S'inscrire</button>
+</form>
+
+{% endblock %}

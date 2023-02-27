@@ -1,4 +1,6 @@
-'''ghh'''
+''' Point d'entrée de l'application
+'''
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -6,10 +8,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index() -> str:
-    ''' représente la page principale de notre application
-	qui affiche la visualisation des données prises l'un des
+    ''' représente la page principale de notre application 
+    qui affiche la visualisation des données prises l'un des
     capteurs en fonction d'une période donnée
-	'''
+    '''
     return render_template("index.html", title="Accueil")
 
 
