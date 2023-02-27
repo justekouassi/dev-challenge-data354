@@ -3,8 +3,9 @@
 {% block body %}
 
 <p class="bienvenue">Bienvenue chez AQ54</p>
-<img src="{{ url_for('static', filename='img/assuretout.png') }}" alt="Logo AssureTout" style="position:absolute; z-index: 2; top: 90px" width="70px">
-<form class="form" method="POST" action="/login">
+<img src="{{ url_for('static', filename='img/assuretout.png') }}" alt="Logo AssureTout"
+	style="position:absolute; z-index: 2; top: 90px" width="70px">
+<form class="form" action="{{ url_for('login') }}" method="post">
 	<div class="title">Connexion</div>
 	<div class="input-container">
 		<input class="input" id="email" name="email" type="email" placeholder=" " />
@@ -17,6 +18,7 @@
 		<label class="placeholder" for="motdepasse">Mot de passe<label />
 	</div>
 	<button class="submit" type="submit">Se connecter</button>
+	<!-- <input type="submit" value="Login"> -->
 </form>
 
 {% endblock %}

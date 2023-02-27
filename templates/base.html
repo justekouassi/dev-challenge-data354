@@ -133,7 +133,6 @@
 							<a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" href="#" role="button"
 								aria-haspopup="true" aria-expanded="false">
 								<span class="d-none d-lg-inline small mr-4 text-gray-600">Nom</span>
-								<img class="img-profile rounded-circle" src="/img/undraw_profile.svg">
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right animated--grow-in shadow" aria-labelledby="userDropdown">
@@ -150,7 +149,6 @@
 				<!-- End of Topbar -->
 
 				{% block body %}
-
 				{% endblock %}
 
 			</div>
@@ -204,25 +202,9 @@
 	<script src="{{ url_for('static', filename='js/jquery.easing.js') }}"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="{{ url_for('static', filename='js/sb-admin-2.js') }}"></script>
-	<!-- Page level plugins -->
-	<script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/dataTables.bootstrap4.js') }}"></script>
-	<script>
-		$(document).ready(function () {
-			$('.table').DataTable({
-				language: {
-					url: "{{ url_for('static', filename='js/datatable-french.json') }}"
-				},
-			});
-		});
-	</script>
-	<!-- Page level plugins -->
-	<script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
 
-	<!-- Page level custom scripts -->
-	<script src="{{ url_for('static', filename='js/chart-area-demo.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/chart-pie-demo.js') }}"></script>
-
+	{% block js %}
+	{% endblock %}
 </body>
 
 </html>

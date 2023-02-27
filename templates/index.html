@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
 {% block body %}
-  <h1>Je suis le plus beau</h1>
+<div id="plot"></div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
+<script>
+	var graphJSON = {{ graphJSON|tojson }};
+	Plotly.plot('plot', graphJSON.data, graphJSON.layout);
+</script>
 {% endblock %}
