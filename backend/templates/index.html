@@ -5,10 +5,10 @@
 <div class="container-fluid">
 	<form action="#" method="post">
 		<label for="date_debut">Date de début : </label>
-		<input type="date" name="date_debut" id="date_debut">
+		<input type="date" name="date_debut" id="date_debut" value="{{date_debut}}">
 		<br>
 		<label for="date_fin">Date de fin : </label>
-		<input type="date" name="date_fin" id="date_fin">
+		<input type="date" name="date_fin" id="date_fin" value="{{date_fin}}">
 		<br>
 		<label for="capteur">Capteur : </label>
 		<select name="capteur" id="capteur">
@@ -18,7 +18,42 @@
 		<br>
 		<input type="submit" value="Chercher">
 	</form>
-	<div id="plot"></div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div id="aux1"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="aux2"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="aux3"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="co"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="no2"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="o3"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="pm10"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="pm2_5"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="rh"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="t"></div>
+		</div>
+		<div class="col-lg-6">
+			<div id="temp_int"></div>
+		</div>
+	</div>
+	
 </div>
 
 {% endblock %}
@@ -26,7 +61,28 @@
 {% block js %}
 <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
 <script>
-	var graphJSON = {{ graphJSON|safe }};
-	Plotly.plot('plot', graphJSON.data, graphJSON.layout);
+	var graphAUX1 = {{ graphAUX1|safe }}
+	var graphAUX2 = {{ graphAUX2|safe }}
+	var graphAUX3 = {{ graphAUX3|safe }}
+	var graphCO = {{ graphCO|safe }}
+	var graphNO2 = {{ graphNO2|safe }}
+	var graphO3 = {{ graphO3|safe }}
+	var graphPM10 = {{ graphPM10|safe }}
+	var graphPM2_5 = {{ graphPM2_5|safe }}
+	var graphRH = {{ graphRH|safe }}
+	var graphT = {{ graphT|safe }}
+	var graphTemp_int = {{ graphTemp_int|safe }}
+	
+	Plotly.plot('aux1', graphAUX1.data, graphAUX1.layout)
+	Plotly.plot('aux2', graphAUX2.data, graphAUX2.layout)
+	Plotly.plot('aux3', graphAUX3.data, graphAUX3.layout)
+	Plotly.plot('co', graphCO.data, graphCO.layout)
+	Plotly.plot('no2', graphNO2.data, graphNO2.layout)
+	Plotly.plot('o3', graphO3.data, graphO3.layout)
+	Plotly.plot('pm10', graphPM10.data, graphPM10.layout)
+	Plotly.plot('pm2_5', graphPM2_5.data, graphPM2_5.layout)
+	Plotly.plot('rh', graphRH.data, graphRH.layout)
+	Plotly.plot('t', graphT.data, graphT.layout)
+	Plotly.plot('temp_int', graphTemp_int.data, graphTemp_int.layout)
 </script>
 {% endblock %}
