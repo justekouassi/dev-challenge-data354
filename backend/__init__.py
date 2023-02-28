@@ -7,7 +7,7 @@ from flask_login import UserMixin
 db = SQLAlchemy()
 
 
-def create_app() -> Flask:
+def create_app():
     app = Flask(__name__)
 
 	# configuration de l'application

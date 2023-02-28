@@ -6,7 +6,6 @@ main = Blueprint('main', __name__)
 
 
 @main.route('/')
-@login_required
 def index():
     ''' représente la page principale de notre application
     qui affiche la visualisation des données prises l'un des

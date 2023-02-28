@@ -19,5 +19,12 @@
 	</div>
 	<button class="submit" type="submit">S'inscrire</button>
 </form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="notification is-danger">
+	{{ messages[0] }}. <a href="{{ url_for('auth.login') }}">Connectez-vous.</a>
+</div>
+{% endif %}
+{% endwith %}
 
 {% endblock %}
