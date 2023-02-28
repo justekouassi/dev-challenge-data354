@@ -18,7 +18,13 @@
 		<label class="placeholder" for="password">Mot de passe<label />
 	</div>
 	<button class="submit" type="submit">Se connecter</button>
-	<!-- <input type="submit" value="Login"> -->
 </form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="notification is-danger">
+	{{ messages[0] }}
+</div>
+{% endif %}
+{% endwith %}
 
 {% endblock %}
