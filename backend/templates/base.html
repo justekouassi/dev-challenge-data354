@@ -31,7 +31,7 @@
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-house-user"></i>
+					<i class="fas fa-wind"></i>
 				</div>
 				<div class="sidebar-brand-text mx-3"></div>
 			</a>
@@ -42,7 +42,7 @@
 			<!-- Nav Item - Accueil -->
 			<li class="nav-item">
 				<a class="nav-link" href="javascript:void(0)">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<i class="fas fa-fw fa-user"></i>
 					<span>{{ email }}</span>
 				</a>
 			</li>
@@ -53,7 +53,7 @@
 			<!-- Nav Item - Tables -->
 			<li class="nav-item">
 				<a class="nav-link" href="/">
-					<i class="fas fa-fw fa-user-edit"></i>
+					<i class="fas fa-fw fa-chart-bar"></i>
 					<span>Visualisation</span>
 				</a>
 			</li>
@@ -61,7 +61,7 @@
 			<!-- Nav Item - Tables -->
 			<li class="nav-item">
 				<a class="nav-link" href="/prediction">
-					<i class="fas fa-fw fa-user-graduate"></i>
+					<i class="fas fa-fw fa-lightbulb"></i>
 					<span>Prédiction</span>
 				</a>
 			</li>
@@ -72,7 +72,7 @@
 			<!-- Nav Item - Tables -->
 			<li class="nav-item">
 				<a class="nav-link" href="/logout">
-					<i class="fas fa-fw fa-users"></i>
+					<i class="fas fa-fw fa-sign-out-alt"></i>
 					<span>Déconnexion</span>
 				</a>
 			</li>
@@ -80,14 +80,14 @@
 
 			{% if not current_user.is_authenticated %}
 			<li class="nav-item">
-				<a class="nav-link" href="{{ url_for('auth.login') }}">
+				<a class="nav-link" href="/login">
 					<i class="fas fa-fw fa-user-graduate"></i>
 					<span>Connexion</span>
 				</a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="{{ url_for('auth.signup') }}">
+				<a class="nav-link" href="/signup">
 					<i class="fas fa-fw fa-user-graduate"></i>
 					<span>Inscription</span>
 				</a>

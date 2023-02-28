@@ -1,13 +1,32 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div id="plot"></div>
+
+<div class="container-fluid">
+	<form action="#" method="post">
+		<label for="date_debut">Date de début : </label>
+		<input type="date" name="date_debut" id="date_debut">
+		<br>
+		<label for="date_fin">Date de fin : </label>
+		<input type="date" name="date_fin" id="date_fin">
+		<br>
+		<label for="capteur">Capteur : </label>
+		<select name="capteur" id="capteur">
+			<option value="SMART188">Capteur 188</option>
+			<option value="SMART189">Capteur 189</option>
+		</select>
+		<br>
+		<input type="submit" value="Chercher">
+	</form>
+	<div id="plot"></div>
+</div>
+
 {% endblock %}
 
 {% block js %}
 <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
 <script>
-	var graphJSON = {{ graphJSON|tojson }};
+	var graphJSON = {{ graphJSON|safe }};
 	Plotly.plot('plot', graphJSON.data, graphJSON.layout);
 </script>
 {% endblock %}
