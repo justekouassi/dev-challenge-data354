@@ -1,4 +1,3 @@
-import email
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 from .graphique import generate_plot
@@ -10,7 +9,7 @@ main = Blueprint('main', __name__)
 @login_required
 def index():
     ''' représente la page principale de notre application
-    qui affiche la visualisation des données prises l'un des
+    qui affiche la visualisation des données prises par l'un des
     capteurs en fonction d'une période donnée
     '''
     graphJSON = generate_plot()
@@ -25,7 +24,7 @@ def graph():
 
 @main.route('/prediction')
 def prediction() -> str:
-    ''' assure la prédiction
+    ''' affiche la page de prédiction de la qualité de l'air
     '''
-    return render_template('prediction.html', title='Prédiction')
+    return render_template('prediction.html', title='Prédiction', email=current_user.email)
 

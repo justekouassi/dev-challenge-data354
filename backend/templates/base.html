@@ -65,12 +65,10 @@
 					<span>Prédiction</span>
 				</a>
 			</li>
-			{% endif %}
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
 
-			{% if current_user.is_authenticated %}
 			<!-- Nav Item - Tables -->
 			<li class="nav-item">
 				<a class="nav-link" href="/logout">
@@ -112,62 +110,12 @@
 			<!-- Main Content -->
 			<div id="content">
 
-				<!-- Topbar -->
-				<nav class="navbar navbar-expand navbar-light topbar static-top mb-4 bg-white shadow">
-
-					<!-- Sidebar Toggle (Topbar) -->
-					<div class="form-inline">
-						<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
-
-					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
-
-						<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-						<li class="nav-item dropdown no-arrow d-sm-none">
-							<a class="nav-link dropdown-toggle" id="searchDropdown" data-toggle="dropdown" href="#" role="button"
-								aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-search fa-fw"></i>
-							</a>
-							<!-- Dropdown - Messages -->
-							<div class="dropdown-menu dropdown-menu-right animated--grow-in p-3 shadow"
-								aria-labelledby="searchDropdown">
-								<form class="form-inline w-100 navbar-search mr-auto">
-									<div class="input-group">
-										<input class="form-control bg-light small border-0" type="search" aria-label="Search"
-											aria-describedby="basic-addon2" placeholder="Recherche ...">
-										<div class="input-group-append">
-											<button class="btn btn-primary" type="button">
-												<i class="fas fa-search fa-sm"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</li>
-
-						<div class="topbar-divider d-none d-sm-block"></div>
-						<!-- Nav Item - User Information -->
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" href="/logout" role="button"
-								aria-haspopup="true" aria-expanded="false">
-								<span class="d-none d-lg-inline small mr-4 text-gray-600">Nom</span>
-							</a>
-							<!-- Dropdown - User Information -->
-							<div class="dropdown-menu dropdown-menu-right animated--grow-in shadow" aria-labelledby="userDropdown">
-								<a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" href="#">
-									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-									Déconnexion
-								</a>
-							</div>
-						</li>
-
-					</ul>
-
-				</nav>
-				<!-- End of Topbar -->
+				<!-- Sidebar Toggle (Topbar) -->
+				<div class="form-inline m-3">
+					<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
+						<i class="fa fa-bars"></i>
+					</button>
+				</div>
 
 				{% block body %}
 				{% endblock %}

@@ -1,4 +1,4 @@
-''' knoif
+''' Ensembles de fonctions dessinant des graphiques
 '''
 
 import plotly.graph_objs as go
