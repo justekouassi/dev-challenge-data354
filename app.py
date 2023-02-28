@@ -2,22 +2,37 @@
 '''
 
 from flask import Flask, render_template, jsonify
-# import MySQLdb.cursors
-# from flask_mysqldb import MySQL
-import re
+from flask_sqlalchemy import SQLAlchemy
 from graphique import generate_plot
 
 app = Flask(__name__)
 app.secret_key = 'justix'
 
 # connexion à la base de données
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'data354'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///project.db'
 
-# Intialisation de MySQL
-# mysql = MySQL(app)
+# Intialisation de SQLAlchemy
+db = SQLAlchemy()
+db.init_app(app)
+
+
+def create_app():
+    app = Flask(__name__)
+
+    app.config['SECRET_KEY'] = 'secret-key-goes-here'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+
+    db.init_app(app)
+
+    # blueprint for auth routes in our app
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
+
+    # blueprint for non-auth parts of app
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    return app
 
 
 @app.route('/')
@@ -36,38 +51,14 @@ def graph():
     return graphJSON
 
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login() -> str:
-#     ''' assure la connexion d'un utilisateur
-#     '''
-#     # Output message if something goes wrong...
-#     msg = ''
-#     # vérifie si l'utilisateur a bien rempli le formulaire
-#     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
-#         # création des variables
-#         email = request.form['email']
-#         password = request.form['password']
-#     # vérifie si le compte existe
-#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-#     cursor.execute(
-#         'SELECT * FROM users WHERE email = %s AND password = %s', (email, password))
-#     # Fetch one record and return result
-#     user = cursor.fetchone()
-#     # If user exists in users table in out database
-#     if user:
-#         # Create session data, we can access this data in other routes
-#         session['loggedin'] = True
-#         session['id'] = user['id']
-#         session['username'] = user['username']
-#         # Redirect to home page
-#         return 'Logged in successfully!'
-#     else:
-#         # user doesnt exist or username/password incorrect
-#         msg = 'Incorrect username/password!'
-#     return render_template('login.html', msg='', title='Connexion')
+@app.route('/login', methods=['GET', 'POST'])
+def login() -> str:
+    ''' assure la connexion d'un utilisateur
+    '''
+    return render_template('login.html', title='Connexion')
 
 
-@app.route('/signup')
+@app.route('/signup', methods=['POST'])
 def signup() -> str:
     ''' assure l'inscription d'un utilisateur
     '''
