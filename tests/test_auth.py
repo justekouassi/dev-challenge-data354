@@ -1,8 +1,7 @@
 import unittest
-import mysql.connector as mc
-import hashlib
-from flask import session
-
+from flask import session, url_for
+from flask_login import current_user
+from backend import create_app, db
 
 class TestAuth(unittest.TestCase):
     ''' cette classe permet de tester les fonctions d'authentification

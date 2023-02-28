@@ -7,7 +7,7 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 
 
-def create_app():
+def create_app() -> Flask:
     app = Flask(__name__)
 
     # configuration de l'application
