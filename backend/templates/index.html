@@ -7,7 +7,7 @@
 		<div class="col-lg-6">
 			<h2>Guide d'utilisation</h2>
 			<ol>
-				<li>Pour afficher les indicateurs du jour, laisser les champs de date vides</li>
+				<li>Pour afficher la quantité de CO2 dans l'air du jour, laisser les champs de date vides</li>
 				<li>Pour visualiser les indicateurs d'un jour donné, remplissez le champ de date de début et laissez celui de fin vide</li>
 				<li>Pour visualiser les indicateurs d'une période donnée, remplissez tous les champs.</li>
 				<li>NB : La période ne doit pas excéder 365 jours.</li>
@@ -36,6 +36,11 @@
 	</div>
 
 	<div class="row">
+		{% if value != '' %}
+		<div class="col-lg-6">
+			<div>Quantité de CO2 dans l'air le {{ utc_timestamp }} : {{ value }} ppm</div>
+		</div>
+		{% endif %}
 		<div class="col-lg-6">
 			<div id="aux1"></div>
 		</div>

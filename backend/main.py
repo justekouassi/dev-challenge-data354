@@ -25,9 +25,9 @@ def index():
         capteur = request.form.get('capteur')
 
         # si la date de fin n'est pas renseignée
-        if date_fin == '':
+        if len(date_fin) < 1:
             # ni la date de début
-            if date_debut == '':
+            if len(date_debut) < 1:
                 # alors on retourne les valeurs courantes de la station
                 from datetime import datetime as dt
                 utc_timestamp = dt.strftime(dt.now(), "%d-%m-%Y à %H:%M:%S") # la date courante
@@ -36,8 +36,9 @@ def index():
             # sinon on retourne les valeurs correspondantes pour ce jour
             else:
                 x, y = get_single_day(capteur, date_debut)
-        # si les deux dates sont renseignées, on retourne les valeurs correspondantes à cette période
-        x, y = get_range_data(capteur, date_debut, date_fin)
+        else:
+            # si les deux dates sont renseignées, on retourne les valeurs correspondantes à cette période
+            x, y = get_range_data(capteur, date_debut, date_fin)
 
         # on génère les graphiques associés à chaque indicateur
         graphAUX1 = generate_plot(x, y['AUX1'], 'AUX1')
@@ -68,6 +69,7 @@ def index():
                                graphTemp_int=graphTemp_int,
                                date_debut=date_debut,
                                date_fin=date_fin,
+                               value=''
                                )
 
-    return render_template('index.html', title='Accueil', email=current_user.email)
+    return render_template('index.html', title='Accueil', email=current_user.email, value='')

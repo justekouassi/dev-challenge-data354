@@ -16,7 +16,18 @@ def get_raw_data(reponse: requests.Response) -> tuple[list, dict[str, list]]:
     ''' fournit les données d'un capteur à partir de la réponse d'un endpoint donné
     '''
     # listes des valeurs de chaque indicateur sur la période donnée
-    AUX1_list = AUX2_list = AUX3_list = CO_list = NO2_list = O3_list = PM10_list = PM2_5_list = RH_list = T_list = Temp_int_list = utc_timestamp = []
+    AUX1_list = []
+    AUX2_list = []
+    AUX3_list = []
+    CO_list = []
+    NO2_list = []
+    O3_list = []
+    PM10_list = []
+    PM2_5_list = []
+    RH_list = []
+    T_list = []
+    Temp_int_list = []
+    utc_timestamp = []
     for i in range(len(reponse['raw_data'])):
         AUX1_list.append(reponse['raw_data'][i]['AUX1'])
         AUX2_list.append(reponse['raw_data'][i]['AUX2'])
