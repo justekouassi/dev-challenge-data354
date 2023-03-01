@@ -45,3 +45,30 @@ Construire une plateforme web permettant à différents utilisateurs de consulte
 - Site d'inspiration : https://map.airqino.it/
 - Projet : AQ54
 - Stations : 188 et 189
+
+## Exécution
+
+1. Se positionner dans le répertoire du projet dev-challenge-data354
+``` bash
+~$ dev-challenge-data354 > _
+```
+2. Installer les modules du fichier requirements.txt
+``` bash
+pip install -r requirements.txt
+```
+3. Modifier les variables d'environnement
+``` bash
+export FLASK_APP=backend
+export FLASK_DEBUG=1
+```
+4. Lancer le programme
+``` bash
+flask run
+```
+
+
+## Hébergement
+
+Le site est disponible via le lien suivant : [justekouassi.pythonanywhere.com](https://justekouassi.pythonanywhere.com)
+
+NB : Pythonanywhere dispose d'une liste d'API autorisées à s'exécuter via leur domaine. Si une API ne fait pas partie de cette, il est essentiel pour le développeur d'en faire une demande. Ce qui a été fait. A la date de consultation du site, il se peut que l'API ne soit pas encore ajouté à cette liste.
