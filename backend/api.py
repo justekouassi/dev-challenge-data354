@@ -9,7 +9,14 @@ URL_API = "https://airqino-api.magentalab.it/"  # url de l'API
 def getResponse(url: str) -> requests.Response:
     ''' retourne la réponse d'une requête de type GET
     '''
-    return requests.get(url, timeout=60).json()
+    from urllib3.exceptions import InsecureRequestWarning
+    from urllib3 import disable_warnings
+    disable_warnings(InsecureRequestWarning)
+    # En l'absence d'un certificat de vérification HTTPS, 
+	# on met l'option 'verify' de la méthode 'get' à False pour éviter tout blocage lors du déploiement
+	# Le code ci-dessus permet aussi de supprimer les avertissements liés à cette faille de sécurité
+    return requests.get(url, timeout=60, verify=False).json()
+
 
 
 def get_raw_data(reponse: requests.Response) -> tuple[list, dict[str, list]]:
