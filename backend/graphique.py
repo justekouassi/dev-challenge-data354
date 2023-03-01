@@ -1,8 +1,7 @@
-''' Ensembles de fonctions dessinant des graphiques
+''' Module qui assure le dessin des graphiques
 '''
 
 import plotly.graph_objs as go
-import json
 
 
 def generate_plot(x: list = [], y: list = [], title: str = ''):

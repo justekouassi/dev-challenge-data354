@@ -8,6 +8,8 @@ db = SQLAlchemy()
 
 
 def create_app() -> Flask:
+    ''' fonction principale qui génère l'application
+    '''
     app = Flask(__name__)
 
     # configuration de l'application
@@ -24,14 +26,13 @@ def create_app() -> Flask:
 
     @login_manager.user_loader
     def load_user(user_id):
-        # since the user_id is just the primary key of our user table, use it in the query for the user
         return User.query.get(int(user_id))
 
     # blueprint pour les routes d'authentification (accessibles à tous)
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    # blueprint pour les routes sécurisées
+    # blueprint pour les routes de visualisation (sécurisées et accessibles aux utilisateurs connectés)
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 

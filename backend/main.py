@@ -1,20 +1,21 @@
-''' Module de visualisation
+''' Module de visualisation 
 '''
 
-from flask import Blueprint, request, render_template, flash
+from flask import Blueprint, request, render_template
 from flask_login import login_required, current_user
-from .api import get_range_data
+from .api import get_current_values_co2, get_range_data, get_single_day
 from .graphique import generate_plot
 
+# sous-application gérant la visualisation
 main = Blueprint('main', __name__)
 
 
 @main.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
-    ''' représente la page principale de notre application
-    qui affiche la visualisation des données prises par l'un des
-    capteurs en fonction d'une période donnée
+    ''' route principale de notre application qui permet la visualisation 
+    des valeurs des indicateurs prises par l'un des capteurs 
+    en fonction d'une période donnée
     '''
     # lorsque que l'utilisateur fait une recherche
     if request.method == 'POST':
@@ -23,8 +24,22 @@ def index():
         date_fin = request.form.get('date_fin')
         capteur = request.form.get('capteur')
 
+        # si la date de fin n'est pas renseignée
+        if date_fin == '':
+            # ni la date de début
+            if date_debut == '':
+                # alors on retourne les valeurs courantes de la station
+                from datetime import datetime as dt
+                utc_timestamp = dt.strftime(dt.now(), "%d-%m-%Y à %H:%M:%S") # la date courante
+                value = get_current_values_co2(capteur)
+                return render_template('index.html', title='Accueil', email=current_user.email, utc_timestamp=utc_timestamp, value=value)
+            # sinon on retourne les valeurs correspondantes pour ce jour
+            else:
+                x, y = get_single_day(capteur, date_debut)
+        # si les deux dates sont renseignées, on retourne les valeurs correspondantes à cette période
         x, y = get_range_data(capteur, date_debut, date_fin)
 
+        # on génère les graphiques associés à chaque indicateur
         graphAUX1 = generate_plot(x, y['AUX1'], 'AUX1')
         graphAUX2 = generate_plot(x, y['AUX2'], 'AUX2')
         graphAUX3 = generate_plot(x, y['AUX3'], 'AUX3')
@@ -56,10 +71,3 @@ def index():
                                )
 
     return render_template('index.html', title='Accueil', email=current_user.email)
-
-
-@main.route('/prediction')
-def prediction() -> str:
-    ''' affiche la page de prédiction de la qualité de l'air
-    '''
-    return render_template('prediction.html', title='Prédiction', email=current_user.email)
