@@ -16,8 +16,10 @@ def create_app() -> Flask:
     app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
+	# initialisation de l'application Flask
     db.init_app(app)
 
+	# configuration du système d'authentification pour l'application
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)

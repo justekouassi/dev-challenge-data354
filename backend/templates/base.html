@@ -13,134 +13,72 @@
 	<link type="image/png" href="{{ url_for('static', filename='img/favicon_io/favicon-16x16.png') }}" rel="icon"
 		sizes="16x16">
 	<link href="{{ url_for('static', filename='img/favicon_io/site.webmanifest') }}" rel="manifest">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/dataTables.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 	<title>{{ title }} | AQ54</title>
 </head>
 
 <body>
-	<!-- Page Wrapper -->
-	<div id="wrapper">
+	<div class="d-flex flex-column" id="content-wrapper">
 
-		<!-- Sidebar -->
-		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-wind"></i>
-				</div>
-				<div class="sidebar-brand-text mx-3"></div>
-			</a>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
-			{% if current_user.is_authenticated %}
-			<!-- Nav Item - Accueil -->
-			<li class="nav-item">
-				<a class="nav-link" href="javascript:void(0)">
-					<i class="fas fa-fw fa-user"></i>
-					<span>{{ email }}</span>
-				</a>
-			</li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider">
-
-			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link" href="/">
-					<i class="fas fa-fw fa-chart-bar"></i>
-					<span>Visualisation</span>
-				</a>
-			</li>
-
-			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link" href="/prediction">
-					<i class="fas fa-fw fa-lightbulb"></i>
-					<span>Prédiction</span>
-				</a>
-			</li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider">
-
-			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link" href="/logout">
-					<i class="fas fa-fw fa-sign-out-alt"></i>
-					<span>Déconnexion</span>
-				</a>
-			</li>
-			{% endif %}
-
-			{% if not current_user.is_authenticated %}
-			<li class="nav-item">
-				<a class="nav-link" href="/login">
-					<i class="fas fa-fw fa-user-graduate"></i>
-					<span>Connexion</span>
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link" href="/signup">
-					<i class="fas fa-fw fa-user-graduate"></i>
-					<span>Inscription</span>
-				</a>
-			</li>
-			{% endif %}
-
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class="d-none d-md-inline text-center">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
-
-		</ul>
-		<!-- End of Sidebar -->
-
-		<!-- Content Wrapper -->
-		<div class="d-flex flex-column" id="content-wrapper">
-
-			<!-- Main Content -->
-			<div id="content">
-
-				<!-- Sidebar Toggle (Topbar) -->
-				<div class="form-inline m-3">
-					<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
-						<i class="fa fa-bars"></i>
-					</button>
-				</div>
-
-				{% block body %}
-				{% endblock %}
-
-			</div>
-			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright my-auto text-center">
-						<span>Copyright &copy; Juste Kouassi - 2023</span>
+		<!-- Topbar -->
+		<nav class="navbar navbar-expand navbar-light topbar static-top mb-4 bg-white shadow">
+			<!-- Navbar brand -->
+			<p class="nav-item mt-3">
+				<a class="nav-link" href="/">AQ54</a>
+			</p>
+			<!-- Topbar Navbar -->
+			<ul class="navbar-nav ml-auto mt-5">
+				{% if not current_user.is_authenticated %}
+				<li class="nav-item">
+					<a class="nav-link d-none d-sm-inline" href="/signup">
+						Inscription
+					</a>
+				</li>
+				<div class="topbar-divider d-none d-sm-block mb-5"></div>
+				<li class="nav-item">
+					<a class="nav-link d-sm-inline mb-5" href="/login">
+						Connexion
+					</a>
+				</li>
+				{% endif %}
+				<!-- Nav Item - User Information -->
+				<li class="nav-item dropdown no-arrow">
+					<a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" href="#" role="button"
+						aria-haspopup="true" aria-expanded="false">
+						<span class="d-lg-inline small mr-4 text-gray-600 mb-5">{{ email }}</span>
+					</a>
+					<!-- Dropdown - logout -->
+					<div class="dropdown-menu dropdown-menu-right animated--grow-in shadow" aria-labelledby="userDropdown">
+						<a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" href="#">
+							<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+							Déconnexion
+						</a>
 					</div>
+				</li>
+			</ul>
+		</nav>
+		<!-- End of Topbar -->
+
+		{% block body %}
+		{% endblock %}
+
+		<!-- Footer -->
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright my-auto text-center">
+					<span>Copyright &copy; Juste Kouassi - 2023</span>
 				</div>
-			</footer>
-			<!-- End of Footer -->
-
-		</div>
-		<!-- End of Content Wrapper -->
-
+			</div>
+		</footer>
+		<!-- End of Footer -->
 	</div>
-	<!-- End of Page Wrapper -->
 
 	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top">
+	<a class="scroll-to-top rounded" href="#">
 		<i class="fas fa-angle-up"></i>
 	</a>
 
@@ -164,14 +102,11 @@
 		</div>
 	</div>
 
-	<!-- Bootstrap core JavaScript-->
+	<!-- JavaScript -->
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-	<!-- Core plugin JavaScript-->
 	<script src="{{ url_for('static', filename='js/jquery.easing.js') }}"></script>
-	<!-- Custom scripts for all pages-->
 	<script src="{{ url_for('static', filename='js/sb-admin-2.js') }}"></script>
-
 	{% block js %}
 	{% endblock %}
 </body>

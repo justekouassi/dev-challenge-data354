@@ -2,29 +2,32 @@
 
 {% block body %}
 
-<!-- <p class="bienvenue">Bienvenue chez AQ54</p> -->
-<img src="{{ url_for('static', filename='img/assuretout.png') }}" alt="Logo AssureTout"
-	style="position:absolute; z-index: 2; top: 90px" width="70px">
-<form class="form" action="/login" method="post">
-	<div class="title">Connexion</div>
-	<div class="input-container">
-		<input class="input" id="email" name="email" type="email" placeholder=" " />
-		<div class="cut-short"></div>
-		<label class="placeholder" for="email">Email<label />
-	</div>
-	<div class="input-container">
-		<input class="input" id="password" name="password" type="password" placeholder=" " />
-		<div class="cut-short"></div>
-		<label class="placeholder" for="password">Mot de passe<label />
-	</div>
-	<button class="submit" type="submit">Se connecter</button>
-</form>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<div class="notification is-danger">
-	{{ messages[0] }}
+<div class="container">
+	<p class="bienvenue">Bienvenue sur AQ54</p>
+	<form class="form" action="/login" method="post">
+		<div class="title">Connexion</div>
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<div class="text-danger text-center">
+			{{ messages[0] }}
+		</div>
+		{% endif %}
+		{% endwith %}
+		<div class="input-container">
+			<input class="input" id="email" name="email" type="email" placeholder=" " />
+			<div class="cut-short"></div>
+			<label class="placeholder" for="email">Email<label />
+		</div>
+		<div class="input-container">
+			<input class="input" id="password" name="password" type="password" placeholder=" " />
+			<div class="cut-short"></div>
+			<label class="placeholder" for="password">Mot de passe<label />
+		</div>
+		<button class="submit" type="submit">Se connecter</button>
+		<div class="mt-4 text-center">
+			<a href="/signup" style="color: white;">Vous n'êtes pas encore inscrit ?</a>
+		</div>
+	</form>
 </div>
-{% endif %}
-{% endwith %}
 
 {% endblock %}
